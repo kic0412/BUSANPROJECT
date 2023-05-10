@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>부산 숙박</title>
+  <link rel="stylesheet" href="hotel.css">
+
+
+</head>
+
+<body>
+  <div id="ys_body">
+    <h1 style="text-align: center; margin-top: 100px; background-color: white;">숙박 테스트</h1>
+    <div id="check">
+      <label><input type="checkbox" name="filter" value="물품보관함유무">물품보관</label>
+      <label><input type="checkbox" name="filter" value="수유실유무">수유실</label>
+      <label><input type="checkbox" name="filter" value="유아거치대유무">유아거치대</label>
+      <label><input type="checkbox" name="filter" value="점자유도로유무">점자도로</label>
+      <label><input type="checkbox" name="filter" value="주차가능여부">주차가능</label>
+      <label><input type="checkbox" name="filter" value="휠체어이동가능여부">휠체어이동</label>
+
+      <div id="searchBar">
+        <input id="search" type="text" value="">
+        <button id="button" onclick="getdata()">검색</button>
+      </div>
+    </div>
+    <div id="searchResult"></div>
+  </div>
+
+  <!--Waves Container-->
+  <div>
+    <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+      viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+      <defs>
+        <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+      </defs>
+      <g class="parallax">
+        <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+        <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+        <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+        <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+      </g>
+    </svg>
+  </div>
+  <!--Waves end-->
+
+  <script src="hotel.js"></script>
+</body>
+
+</html>

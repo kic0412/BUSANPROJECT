@@ -1,0 +1,51 @@
+#GD_Body {
+    width: 980px;
+    height: auto;
+    margin: auto;
+    background-color: lightgray;
+}
+
+#page1 {
+    background-color: white;
+}
+
+#GD_h1 {
+    text-align: center
+}
+
+#GD_button {
+    text-align: center;
+}
+
+#GD_search {
+    text-align: center;
+}
+
+#GD_searchBox {
+    width: 226px;
+    margin: auto;
+    display: block;
+}
+
+#test1 {
+    text-align: center;
+}
+
+#GD_Filter {
+    text-align: center;
+}
+
+.item-description {
+    margin-left: 50px;
+    margin-right: 50px;
+    line-height: 35px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+
+.expanded {
+    -webkit-line-clamp: unset;
+}

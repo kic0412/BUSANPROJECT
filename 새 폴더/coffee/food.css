@@ -1,0 +1,36 @@
+
+#GD_Body{
+    width: 980px;
+    height: auto;
+    margin: auto;
+    background-color: lightgray;
+}
+#page1{
+    background-color: white;
+}
+
+#GD_h1 {
+    text-align: center
+}
+
+#GD_button {
+    text-align: center;
+}
+
+#GD_search {
+    text-align: center;
+}
+
+#GD_searchBox{
+    width: 226px;
+    margin: auto;
+    display: block;
+}
+
+#test1 {
+    text-align: center;
+}
+
+#GD_Filter{
+    text-align: center;
+}

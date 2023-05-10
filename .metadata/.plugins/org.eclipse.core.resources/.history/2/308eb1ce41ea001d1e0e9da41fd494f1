@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>데이터베이스 검색</title>
+</head>
+<body>
+  <form>
+    <input type="text" id="search" placeholder="검색어를 입력하세요">
+    <button type="button" onclick="search()">검색</button>
+  </form>
+  <div id="results"></div>
+  
+  <script>
+    function search() {
+      const searchTerm = document.getElementById('search').value;
+
+      fetch('/search?query=' + encodeURIComponent(searchTerm))
+        .then(response => response.json())
+        .then(data => {
+          const resultsDiv = document.getElementById('results');
+          resultsDiv.innerHTML = '';
+
+          if (data.length > 0) {
+            data.forEach(item => {
+              const result = document.createElement('p');
+              result.textContent = `${item.F_ID}, ${item.F_NAME}, ${item.F_PARKING}, ${item.F_WIFI}, ${item.F_MULTILANG}, ${item.F_DAYPOFF}, ${item.F_OPEN_CLOSE}, ${item.F_DELIVER}`;
+              resultsDiv.appendChild(result);
+            });
+          } else {
+            resultsDiv.textContent = '검색 결과가 없습니다.';
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+  </script>
+</body>
+</html>

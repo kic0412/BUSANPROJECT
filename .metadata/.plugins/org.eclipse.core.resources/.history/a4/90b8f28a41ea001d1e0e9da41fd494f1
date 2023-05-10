@@ -1,0 +1,80 @@
+<%@page import="java.sql.*"%> <!-- JDBC를 사용하기 위해 필요한 패키지 import -->
+<head>
+  <meta charset="utf-8">
+</head>
+<html>
+<body>
+<h2>검색 결과</h2>
+<%
+Connection conn = null;
+Statement stmt = null;
+ResultSet rs = null;
+
+try {
+    // Oracle JDBC 드라이버 클래스를 로드
+    Class.forName("oracle.jdbc.driver.OracleDriver");
+
+    // 연결 문자열 설정
+    String url = "jdbc:oracle:thin:@localhost:1521:xe";
+    String user = "PROJECT";
+    String password = "1234";
+
+    // 데이터베이스에 연결
+    conn = DriverManager.getConnection(url, user, password);
+
+    // SQL 쿼리 실행
+    stmt = conn.createStatement();
+    String sql = "SELECT * FROM FOOD";
+    rs = stmt.executeQuery(sql);
+
+    // 검색 결과 출력
+    while (rs.next()) {
+        String f_id = rs.getString("F_ID");
+        String f_name = rs.getString("F_NAME");
+        String f_parking = rs.getString("F_PARKING");
+        String f_wifi = rs.getString("F_WIFI");
+        String f_multilang = rs.getString("F_MULTILANG");
+        String f_daypoff = rs.getString("F_DAYPOFF");
+        String f_open_close = rs.getString("F_OPEN_CLOSE");
+        String f_deliver = rs.getString("F_DELIVER");
+        out.println("F_ID: " + f_id + "<br>");
+        out.println("F_NAME: " + f_name + "<br>");
+        out.println("F_PARKING: " + f_parking + "<br>");
+        out.println("F_WIFI: " + f_wifi + "<br>");
+        out.println("F_MULTILANG: " + f_multilang + "<br>");
+        out.println("F_DAYPOFF: " + f_daypoff + "<br>");
+        out.println("F_OPEN_CLOSE: " + f_open_close + "<br>");
+        out.println("F_DELIVER: " + f_deliver + "<br>");
+        out.println("<hr>");
+    }
+} catch (SQLException e) {
+    out.println("SQL Exception: " + e.getMessage());
+} catch (ClassNotFoundException e) {
+    out.println("Class Not Found Exception: " + e.getMessage());
+} finally {
+    // 리소스 반환
+    if (rs != null) {
+        try {
+            rs.close();
+        } catch (SQLException e) {
+            out.println("SQL Exception: " + e.getMessage());
+        }
+    }
+    if (stmt != null) {
+        try {
+            stmt.close();
+        } catch (SQLException e) {
+            out.println("SQL Exception: " + e.getMessage());
+        }
+    }
+    if (conn != null) {
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            out.println("SQL Exception: " + e.getMessage());
+        }
+    }
+}
+%>
+</body>
+</html>

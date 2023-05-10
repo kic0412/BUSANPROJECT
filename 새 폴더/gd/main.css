@@ -1,0 +1,96 @@
+body {
+    background: skyblue;
+   
+}
+
+footer {
+    position: fixed;
+    top: 95%; right: 1%;
+}
+
+.GD_Box {
+    position: relative;
+    margin-top: 220px;
+    text-align: center;
+}
+
+.GD_Box_text {
+    font-size: 120px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#GD_buttonBox {
+    margin-top: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+
+}
+
+
+
+#GD_ptext {
+    text-align: justify;
+    font-size: 5px;
+    margin-right: 3px;
+}
+
+
+
+#header_navi {
+    display: flex;
+    justify-content: center;
+    /* 가운데 정렬을 위해 추가 */
+    padding: 0;
+    width: 800px;
+    height: 80px;
+    margin: auto;
+}
+
+#header_navi>li {
+    width: 60px;
+    height: 60px;
+    display: inline-block;
+    position: relative;
+    margin-left: 90px;
+    margin-right: 90px;
+    text-align: center;
+    /* 가운데 정렬을 위해 추가 */
+}
+
+#header_navi>li>a {
+    display: block;
+    position: relative;
+    padding-bottom: 19px;
+    margin: 5px;
+    z-index: 100;
+}
+
+#header_navi>li>a>img {
+    width: 50px;
+    height: 50px;
+}
+
+#header_navi>li>a>img:hover {
+    width: 100px;
+    height: 100px;
+}
+
+
+#header_navi>li>a>span {
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    right: 0;
+    color: black;
+    line-height: 1.462em;
+    white-space: nowrap;
+    font-size: 15px;
+    /* 폰트 크기를 조정하세요 */
+    margin: 0 auto;
+    /* 가운데 정렬을 위해 추가 */
+
+}

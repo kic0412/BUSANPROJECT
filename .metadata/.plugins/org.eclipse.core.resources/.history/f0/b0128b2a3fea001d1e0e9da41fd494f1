@@ -1,0 +1,59 @@
+<%@ page import="java.sql.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>DB와 API 테스트</title>
+</head>
+<body>
+  <h1>DB와 API 테스트</h1>
+  <input id="search" type="text" value="">
+  <button id="button1" onclick="search()">검색</button>
+  <p id="result"></p>
+  <script>
+    function search() {
+      let search = document.getElementById("search").value;
+      
+      // Database connection code
+      let conn = null;
+      try {
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:ORCL", "username", "password");
+        let sql = "SELECT F_NAME FROM LOCAL WHERE F_NAME LIKE '%" + search + "%'";
+        let stmt = conn.createStatement();
+        let rs = stmt.executeQuery(sql);
+        let result = "";
+        while(rs.next()) {
+          result += rs.getString("F_NAME") + "<br>";
+        }
+        document.getElementById("result").innerHTML = result;
+        stmt.close();
+      } catch (e) {
+        console.log(e);
+      } finally {
+        if (conn != null) {
+          try {
+            conn.close();
+          } catch (e) {
+            console.log(e);
+          }
+        }
+      }
+      
+      // API data retrieval code
+      fetch('https://api.odcloud.kr/api/15096728/v1/uddi:a7cfe5da-2d11-4416-b67f-aff99ee63bbe?page=1&perPage=2893&serviceKey=dvxaXfX6hB3M%2Fhizzw%2BrCC5c9677ILG8ULWYM7y7R5YLKbl332xtCDxaJGj3TBALyf9sGSQktMV5W3hSS60fJg%3D%3D')
+        .then((response) => response.json())
+        .then((data) => {
+          let result = "";
+          for(let i=0;i<2893;i++){
+            let str = data['getFoodKr']['item'][0]["MAIN_TITLE"];
+            if(str.indexOf(search) != -1){
+              result += str + "<br>";
+            }
+          }
+          document.getElementById("result").innerHTML += result;
+        });
+    }
+  </script>
+</body>
+</html>

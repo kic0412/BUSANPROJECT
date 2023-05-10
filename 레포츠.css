@@ -1,0 +1,147 @@
+body {
+    /* width: 980px; */
+    height: auto;
+    margin: auto;
+    background-color: #84D8E7;
+    font-family: 'noto';
+  }
+
+#page1 {
+        width: 980px;
+        margin: 0 auto;
+        background-color: white;
+        /* border: solid darkgray; */
+        border: solid white;
+        border-radius: 30px;
+        margin-top: 100px;
+        margin-bottom: 100px;
+}
+
+#box {
+    border-top: solid darkgray;
+  }
+
+#GD_h1 {
+    text-align: center;
+    margin-top: 50px; 
+}
+
+#GD_button {
+    text-align: center;
+    cursor: pointer;
+}
+
+#GD_search {
+    text-align: center;
+}
+
+#GD_searchBox {
+    width: 226px;
+    margin: auto;
+    display: block;
+    padding-bottom: 50px;
+}
+
+#test1 {
+    text-align: center;
+}
+
+#GD_Filter {
+    text-align: left;
+    padding: 0 100px 0 100px;
+}
+
+.i {
+    display: inline-block;
+    float: right;
+    cursor: pointer;
+}
+
+#GD_Filter summary {
+    margin-left: 10px;
+    list-style-type: none;
+}
+
+@font-face {
+    font-family: 'noto';
+    src: url("./fonts/NotoSans-Bold.woff") format("woff");
+}
+
+h3 {
+    font-weight: bold;
+}
+
+/* 상세정보 더보기 버튼 */
+.item-description {
+    margin-left: 50px;
+    margin-right: 50px;
+    line-height: 35px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.expanded {
+    -webkit-line-clamp: unset;
+}
+
+.showMoreButton {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+/* 웨이브 효과 */
+.waves {
+    position: relative;
+    width: 100%;
+    height: 15vh;
+    margin-bottom: -7px;
+    /*Fix for safari gap*/
+    min-height: 100px;
+    max-height: 150px;
+}
+
+/* Animation */
+.parallax>use {
+    animation: move-forever 25s cubic-bezier(0.55, .5, 0.45, .5) infinite;
+}
+
+.parallax>use:nth-child(1) {
+    animation-delay: -2s;
+    animation-duration: 7s;
+}
+
+.parallax>use:nth-child(2) {
+    animation-delay: -3s;
+    animation-duration: 10s;
+}
+
+.parallax>use:nth-child(3) {
+    animation-delay: -4s;
+    animation-duration: 13s;
+}
+
+.parallax>use:nth-child(4) {
+    animation-delay: -5s;
+    animation-duration: 20s;
+}
+
+@keyframes move-forever {
+    0% {
+        transform: translate3d(-90px, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(85px, 0, 0);
+    }
+}
+
+/*Shrinking for mobile*/
+@media(max-width: 768px) {
+    .waves {
+        height: 40px;
+        min-height: 40px;
+    }
+}

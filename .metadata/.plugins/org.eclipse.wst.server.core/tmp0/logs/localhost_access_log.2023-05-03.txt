@@ -1,0 +1,13 @@
+127.0.0.1 - - [03/May/2023:16:49:55 +0900] "GET / HTTP/1.1" 404 807
+127.0.0.1 - - [03/May/2023:16:53:52 +0900] "GET / HTTP/1.1" 404 807
+0:0:0:0:0:0:0:1 - - [03/May/2023:16:53:53 +0900] "GET /busan_coffee/NewFile.html HTTP/1.1" 200 126
+0:0:0:0:0:0:0:1 - - [03/May/2023:16:56:07 +0900] "GET /busan_coffee/NewFile.html HTTP/1.1" 200 6245
+0:0:0:0:0:0:0:1 - - [03/May/2023:16:56:10 +0900] "GET /busan_coffee/NewFile.html HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [03/May/2023:16:56:11 +0900] "GET /busan_coffee/NewFile.html HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [03/May/2023:16:56:11 +0900] "GET /busan_coffee/NewFile.html HTTP/1.1" 304 -
+127.0.0.1 - - [03/May/2023:17:28:57 +0900] "GET / HTTP/1.1" 404 807
+0:0:0:0:0:0:0:1 - - [03/May/2023:17:28:57 +0900] "GET /busan_coffee/NewFile.html HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [03/May/2023:17:43:19 +0900] "GET /busan_coffee/NewFile.jsp HTTP/1.1" 500 3592
+0:0:0:0:0:0:0:1 - - [03/May/2023:17:46:16 +0900] "GET /busan_coffee/NewFile.jsp HTTP/1.1" 200 341
+0:0:0:0:0:0:0:1 - - [03/May/2023:17:48:41 +0900] "GET /busan_coffee/NewFile.jsp HTTP/1.1" 200 341
+0:0:0:0:0:0:0:1 - - [03/May/2023:17:51:03 +0900] "GET /busan_coffee/NewFile.jsp HTTP/1.1" 200 277

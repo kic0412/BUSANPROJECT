@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="food.css">
+
+
+
+
+</head>
+
+<body id="GD_Body">
+  <div id="page1">
+
+    <h1 id="GD_h1">식당 테스트</h1>
+    <div id="GD_searchBox">
+      <input id="GD_search" type="text" value="">
+      <button id="GD_button" onclick="getdata()">검색</button>
+    </div>
+    <div id="GD_Filter">
+      <label>
+        <input type="checkbox" name="GUGUN_NM" value="북구" > 북구
+      </label>
+
+      <label>
+        <input type="checkbox" name="GUGUN_NM" value="중구" > 중구
+      </label>
+
+      <label>
+        <input type="checkbox" name="GUGUN_NM" value="서구" > 서구
+      </label>
+
+      <label>
+        <input type="checkbox" name="GUGUN_NM" value="동구" > 동구
+      </label>
+
+      <label>
+        <input type="checkbox" name="GUGUN_NM" value="남구" > 남구
+      </label>
+
+      <label>
+        <input type="checkbox" name="GUGUN_NM" value="사상구" > 사상구
+      </label>
+
+      <label>
+        <input type="checkbox" name="GUGUN_NM" value="사하구" > 사하구
+      </label>
+
+      <label>
+        <input type="checkbox" name="GUGUN_NM" value="수영구" > 수영구
+      </label>
+
+      <label>
+        <input type="checkbox" name="GUGUN_NM" value="연제구" > 연제구
+      </label>
+
+      <label>
+        <input type="checkbox" name="GUGUN_NM" value="영도구" > 영도구
+      </label>
+
+      <label>
+        <input type="checkbox" name="GUGUN_NM" value="해운대구" > 해운대구
+      </label>
+
+      <label>
+        <input type="checkbox" name="GUGUN_NM" value="강서구" > 강서구
+      </label>
+      <label>
+        <input type="checkbox" name="GUGUN_NM" value="금정구" > 금정구
+      </label>
+      <label>
+        <input type="checkbox" name="GUGUN_NM" value="동래구" > 동래구
+      </label>
+      <label>
+        <input type="checkbox" name="GUGUN_NM" value="부산진구" > 부산진구
+      </label>
+      <hr style="height: 5px; background: black;"></hr>
+    </div>
+    <div id="test1"></div>
+  </div>
+
+  </div>
+  <script>
+  function getdata() {
+  fetch('https://apis.data.go.kr/6260000/FoodService/getFoodKr?serviceKey=dvxaXfX6hB3M%2Fhizzw%2BrCC5c9677ILG8ULWYM7y7R5YLKbl332xtCDxaJGj3TBALyf9sGSQktMV5W3hSS60fJg%3D%3D&pageNo=1&numOfRows=150&resultType=json')
+    .then((response) => response.json())
+    .then((data) => {
+      var search = document.getElementById("GD_search").value;
+      var checkboxes = document.querySelectorAll('input[name="GUGUN_NM"]:checked');
+      var selectedRegions = Array.from(checkboxes).map((checkbox) => checkbox.value);
+      var results = [];
+
+      for (let i = 0; i < data['getFoodKr']['item'].length; i++) {
+        var title = data['getFoodKr']['item'][i]['MAIN_TITLE'];
+        var GUGUN_NM = data['getFoodKr']['item'][i]['GUGUN_NM'];
+        var address = data['getFoodKr']['item'][i]['ADDR1'];
+        var openTime = data['getFoodKr']['item'][i]['USAGE_DAY_WEEK_AND_TIME'];
+        var ITEMCNTNTS = data['getFoodKr']['item'][i]['ITEMCNTNTS'];
+        var imageSrc = data['getFoodKr']['item'][i]['MAIN_IMG_THUMB'];
+
+        // 검색어와 선택된 지역 필터를 동시에 만족하는 경우에만 결과에 추가
+        if (title.includes(search) && (selectedRegions.length === 0 || selectedRegions.includes(GUGUN_NM))) {
+          var resultDiv = document.createElement('div');
+          var titleElement = document.createElement('h3');
+          titleElement.textContent = title;
+          resultDiv.appendChild(titleElement);
+
+          var addressElement = document.createElement('p');
+          addressElement.textContent = address;
+          resultDiv.appendChild(addressElement);
+
+          var openTimeElement = document.createElement('p');
+          openTimeElement.textContent = '오픈시간: ' + openTime;
+          resultDiv.appendChild(openTimeElement);
+
+          var ITEMCNTNTSElement = document.createElement('p');
+          ITEMCNTNTSElement.textContent = '상세설명: ' + ITEMCNTNTS;
+          resultDiv.appendChild(ITEMCNTNTSElement);
+
+          var imageElement = document.createElement('img');
+          imageElement.src = imageSrc;
+          resultDiv.appendChild(imageElement);
+
+          results.push(resultDiv);
+
+          if (results.length === 10) {
+            break;
+          }
+        }
+      }
+
+      var resultContainer = document.getElementById('test1');
+      resultContainer.innerHTML = '';
+
+      if (results.length > 0) {
+        for (var i = 0; i < results.length; i++) {
+          resultContainer.appendChild(results[i]);
+        }
+      } else {
+        resultContainer.textContent = '검색 결과가 없습니다.';
+      }
+    });
+}
+
+
+  </script>
+
+  <footer>Coding</footer>
+</body>
+
+</html>

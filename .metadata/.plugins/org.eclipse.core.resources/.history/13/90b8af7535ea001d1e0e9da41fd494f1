@@ -1,0 +1,62 @@
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>My Page</title>
+</head>
+<body>
+  <table>
+    <thead>
+      <tr>
+        <th>Local</th>
+        <th>F_NAME</th>
+        <th>F_PARKING</th>
+        <th>F_WIFI</th>
+        <th>F_MULTILANG</th>
+        <th>F_DAYPOFF</th>
+        <th>F_OPEN_CLOSE</th>
+        <th>F_DELIVER</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% 
+        String url = "jdbc:oracle:thin:@localhost:1521:ORCL"; // replace with your own connection URL
+        String user = "your_username"; // replace with your own username
+        String password = "your_password"; // replace with your own password
+
+        try {
+          Class.forName("oracle.jdbc.driver.OracleDriver");
+          Connection conn = DriverManager.getConnection(url, user, password);
+          Statement stmt = conn.createStatement();
+          ResultSet rs = stmt.executeQuery("SELECT * FROM YOUR_TABLE_NAME");
+
+          while (rs.next()) {
+            out.println("<tr>");
+            out.println("<td>" + rs.getString("LOCAL") + "</td>");
+            out.println("<td>" + rs.getString("F_NAME") + "</td>");
+            out.println("<td>" + rs.getString("F_PARKING") + "</td>");
+            out.println("<td>" + rs.getString("F_WIFI") + "</td>");
+            out.println("<td>" + rs.getString("F_MULTILANG") + "</td>");
+            out.println("<td>" + rs.getString("F_DAYPOFF") + "</td>");
+            out.println("<td>" + rs.getString("F_OPEN_CLOSE") + "</td>");
+            out.println("<td>" + rs.getString("F_DELIVER") + "</td>");
+            out.println("</tr>");
+          }
+
+          rs.close();
+          stmt.close();
+          conn.close();
+
+        } catch (Exception e) {
+          out.println("Error: " + e.getMessage());
+        }
+      %>
+    </tbody>
+  </table>
+</body>
+</html>

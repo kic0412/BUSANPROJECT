@@ -1,0 +1,54 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@  %>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Oracle DB Connection Test</title>
+</head>
+<body>
+	<h1>Oracle DB Connection Test</h1>
+	
+	<%
+	// Set connection parameters
+	String url = "jdbc:oracle:thin:@localhost:1521:ORCL"; // replace with your own connection URL
+	String user = "your_username";
+	String password = "your_password";
+	
+	try {
+		// Load Oracle JDBC driver
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		
+		// Connect to database
+		Connection conn = DriverManager.getConnection(url, user, password);
+		
+		// Create a statement
+		Statement stmt = conn.createStatement();
+		
+		// Execute a query and get the result set
+		ResultSet rs = stmt.executeQuery("SELECT * FROM FOOD");
+		
+		// Display the result set in a table
+		out.println("<table border='1'>");
+		out.println("<tr><th>ID</th><th>Name</th></tr>");
+		while (rs.next()) {
+			out.println("<tr><td>" + rs.getInt("id") + "</td><td>" + rs.getString("name") + "</td></tr>");
+		}
+		out.println("</table>");
+		
+		// Close the result set, statement, and connection
+		rs.close();
+		stmt.close();
+		conn.close();
+		
+	} catch (Exception e) {
+		out.println("Error: " + e.getMessage());
+	}
+	%>
+	
+</body>
+</html>

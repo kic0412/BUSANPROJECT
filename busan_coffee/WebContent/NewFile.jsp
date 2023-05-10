@@ -1,0 +1,65 @@
+<%@ page import="java.sql.*"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>검색 페이지</title>
+</head>
+<body>
+	<h2>검색창</h2>
+	<form>
+		<input type="text" name="searchKeyword">
+		<button type="submit">검색</button>
+	</form>
+	<h2>검색 결과</h2>
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>이름</th>
+			<th>주차 가능 여부</th>
+			<th>와이파이 여부</th>
+			<th>다국어 지원 여부</th>
+			<th>휴무일</th>
+			<th>영업시간</th>
+			<th>배달 가능 여부</th>
+		</tr>
+		
+		<%
+			// JDBC 드라이버 로드
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			
+			// Oracle DB와 연결
+			Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "PROJECT", "1234");
+			
+			// 검색어 받아오기
+			String searchKeyword = request.getParameter("searchKeyword");
+			
+			// SQL 쿼리 실행
+			String sql = "SELECT * FROM FOOD WHERE F_NAME LIKE ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + searchKeyword + "%");
+			ResultSet rs = pstmt.executeQuery();
+			
+			// 검색 결과 출력
+			while(rs.next()) {
+				out.println("<tr>");
+				out.println("<td>" + rs.getInt("F_ID") + "</td>");
+				out.println("<td>" + rs.getString("F_NAME") + "</td>");
+				out.println("<td>" + rs.getString("F_PARKING") + "</td>");
+				out.println("<td>" + rs.getString("F_WIFI") + "</td>");
+				out.println("<td>" + rs.getString("F_MULTILANG") + "</td>");
+				out.println("<td>" + rs.getString("F_DAYPOFF") + "</td>");
+				out.println("<td>" + rs.getString("F_OPEN_CLOSE") + "</td>");
+				out.println("<td>" + rs.getString("F_DELIVER") + "</td>");
+				out.println("</tr>");
+			}
+			
+			// 자원 해제
+			rs.close();
+			pstmt.close();
+			conn.close();
+		%>
+	</table>
+</body>
+</html>

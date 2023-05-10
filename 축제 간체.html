@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="레포츠.css">
+</head>
+
+<body id="GD_Body">
+    <div id="page1">
+        <h1 id="GD_h1">节日</h1>
+        <div id="GD_Filter">
+            <label>
+                <input type="checkbox" name="GUGUN_NM" value="江西区"> 江西区
+            </label>
+
+            <label>
+                <input type="checkbox" name="GUGUN_NM" value="金井区"> 金井区
+            </label>
+
+            <label>
+                <input type="checkbox" name="GUGUN_NM" value="南区"> 南区
+            </label>
+
+            <label>
+                <input type="checkbox" name="GUGUN_NM" value="东区"> 东区
+            </label>
+
+            <label>
+                <input type="checkbox" name="GUGUN_NM" value="东莱区"> 东莱区
+            </label>
+
+            <label>
+                <input type="checkbox" name="GUGUN_NM" value="釜山镇区"> 釜山镇区
+            </label>
+
+            <details>
+                <summary class="i">查看更多</summary>
+                <label>
+                    <input type="checkbox" name="GUGUN_NM" value="北区"> 北区
+                </label>
+
+                <label>
+                    <input type="checkbox" name="GUGUN_NM" value="沙上区"> 沙上区
+                </label>
+
+                <label>
+                    <input type="checkbox" name="GUGUN_NM" value="沙下区"> 沙下区
+                </label>
+
+                <label>
+                    <input type="checkbox" name="GUGUN_NM" value="西区"> 西区
+                </label>
+
+                <label>
+                    <input type="checkbox" name="GUGUN_NM" value="水营区"> 水营区
+                </label>
+
+                <label>
+                    <input type="checkbox" name="GUGUN_NM" value="延济区"> 延济区
+                </label>
+
+                <label>
+                    <input type="checkbox" name="GUGUN_NM" value="影岛区"> 影岛区
+                </label>
+
+                <label>
+                    <input type="checkbox" name="GUGUN_NM" value="中区"> 中区
+                </label>
+
+                <label>
+                    <input type="checkbox" name="GUGUN_NM" value="海云台区"> 海云台区
+                </label>
+            </details>
+        </div>
+        <br>
+        <div id="GD_searchBox">
+            <input id="GD_search" type="text" value="">
+            <button id="GD_button" onclick="getdata()">검색</button>
+        </div>
+        <div id="test1"></div>
+    </div>
+
+    <!--Waves Container-->
+    <div>
+        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+            <defs>
+                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+            </defs>
+            <g class="parallax">
+                <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+                <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+                <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+                <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+            </g>
+        </svg>
+    </div>
+    <!--Waves end-->
+
+    <script>
+        function getdata() {
+            fetch('https://apis.data.go.kr/6260000/FestivalService/getFestivalZhs?serviceKey=JFapnjFdlm%2B4LNZ88cq1N4gArRb5%2Fh88PGaDMEToApvOuWOPJLoiTaP1jdk4f1wuhog1Wv255C4KW%2FZeTm4olg%3D%3D&pageNo=1&numOfRows=30&resultType=json')
+                .then((response) => response.json())
+                .then((data) => {
+                    var search = document.getElementById("GD_search").value;
+                    var checkboxes = document.querySelectorAll('input[name="GUGUN_NM"]:checked');
+                    var selectedRegions = Array.from(checkboxes).map((checkbox) => checkbox.value);
+                    var results = [];
+
+                    for (let i = 0; i < data['getFestivalZhs']['item'].length; i++) {
+                        var title = data['getFestivalZhs']['item'][i]['MAIN_TITLE'];
+                        var GUGUN_NM = data['getFestivalZhs']['item'][i]['GUGUN_NM'];
+                        var address = data['getFestivalZhs']['item'][i]['ADDR1'];
+                        var number = data['getFestivalZhs']['item'][i]['CNTCT_TEL']
+                        var openTime = data['getFestivalZhs']['item'][i]['USAGE_DAY_WEEK_AND_TIME'];
+                        var imageSrc = data['getFestivalZhs']['item'][i]['MAIN_IMG_THUMB'];
+                        var ITEMCNTNTS = data['getFestivalZhs']['item'][i]['ITEMCNTNTS'];
+
+                        // 검색어와 선택된 지역 필터를 동시에 만족하는 경우에만 결과에 추가
+                        if (title.includes(search) && (selectedRegions.length === 0 || selectedRegions.includes(GUGUN_NM) || selectedRegions.includes(address))) {
+                            var resultDiv = document.createElement('div');
+                            resultDiv.id = "box";
+
+                            var titleElement = document.createElement('h3');
+                            titleElement.textContent = title;
+                            resultDiv.appendChild(titleElement);
+
+                            var addressElement = document.createElement('p');
+                            addressElement.textContent = address;
+                            resultDiv.appendChild(addressElement);
+
+                            var numberElement = document.createElement('p');
+                            numberElement.textContent = number;
+                            resultDiv.appendChild(numberElement);
+
+                            var openTimeElement = document.createElement('p');
+                            openTimeElement.textContent = '오픈시간: ' + openTime;
+                            resultDiv.appendChild(openTimeElement);
+
+                            var imageElement = document.createElement('img');
+                            imageElement.src = imageSrc;
+                            resultDiv.appendChild(imageElement);
+
+                            var ITEMCNTNTSElement = document.createElement('p');
+                            ITEMCNTNTSElement.textContent = '상세설명: ' + ITEMCNTNTS;
+                            ITEMCNTNTSElement.classList.add('item-description');
+                            resultDiv.appendChild(ITEMCNTNTSElement);
+
+                            var showMoreButton = document.createElement('button');
+                            showMoreButton.textContent = '더보기';
+                            showMoreButton.classList.add('showMoreButton');
+                            showMoreButton.addEventListener('click', function () {
+                                var itemDescription = this.parentNode.querySelector('.item-description');
+                                if (itemDescription.classList.contains('expanded')) {
+                                    itemDescription.classList.remove('expanded');
+                                    this.textContent = '더보기';
+                                } else {
+                                    itemDescription.classList.add('expanded');
+                                    this.textContent = '접기';
+                                }
+                            });
+                            resultDiv.appendChild(showMoreButton);
+
+                            results.push(resultDiv);
+
+                            if (results.length === 10) {
+                                break;
+                            }
+                        }
+                    }
+
+                    var resultContainer = document.getElementById('test1');
+                    resultContainer.innerHTML = '';
+
+                    if (results.length > 0) {
+                        for (var i = 0; i < results.length; i++) {
+                            resultContainer.appendChild(results[i]);
+                        }
+                    } else {
+                        resultContainer.textContent = '검색 결과가 없습니다.';
+                    }
+                });
+        }
+
+    </script>
+</body>
+
+</html>
