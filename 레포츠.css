@@ -4,26 +4,26 @@ body {
     margin: auto;
     background-color: #84D8E7;
     font-family: 'noto';
-  }
+}
 
 #page1 {
-        width: 980px;
-        margin: 0 auto;
-        background-color: white;
-        /* border: solid darkgray; */
-        border: solid white;
-        border-radius: 30px;
-        margin-top: 100px;
-        margin-bottom: 100px;
+    width: 980px;
+    margin: 0 auto;
+    background-color: white;
+    /* border: solid darkgray; */
+    border: solid white;
+    border-radius: 30px;
+    margin-top: 100px;
+    margin-bottom: 100px;
 }
 
 #box {
     border-top: solid darkgray;
-  }
+}
 
 #GD_h1 {
     text-align: center;
-    margin-top: 50px; 
+    margin-top: 50px;
 }
 
 #GD_button {
@@ -145,4 +145,46 @@ h3 {
         height: 40px;
         min-height: 40px;
     }
+}
+
+#header_Lang{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 50px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+#header_Lang>li {
+    width: auto;
+    height: 60px;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+}
+#header_Lang>li>a{
+    display: block;
+    position: relative;
+    padding: 5px;
+    margin: 5px;
+    z-index: 100;
+    color: black;
+    text-decoration: none;
+    border: solid darkgray;
+    border-radius: 15px;
+    text-align: center;
+}
+
+#header_Lang>li>a>span {
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    right: 0;
+    color: black;
+    line-height: 1.462em;
+    white-space: nowrap;
+    font-size: 15px;
+    /* 폰트 크기를 조정하세요 */
+    margin: 0 auto;
+    /* 가운데 정렬을 위해 추가 */
+    text-align: center;
 }
